@@ -1,0 +1,34 @@
+Kiro, I need you to build a comprehensive ZPL parser in TypeScript based on our specification. 
+
+Please create:
+
+1. **TypeScript interfaces** for the ZPL AST that represent:
+   - Root document structure
+   - Individual command types (label control, field placement, text, barcodes, graphics)
+   - Coordinate systems and measurement units
+   - Error tracking
+
+2. **Tokenizer/Lexer** that:
+   - Splits ZPL input into tokens
+   - Handles ZPL's caret-prefixed command syntax
+   - Manages parameter parsing for different command types
+   - Preserves original source positions for error reporting
+
+3. **Recursive Descent Parser** that:
+   - Builds AST from tokens
+   - Validates command structure and parameters
+   - Handles nested command sequences
+   - Provides meaningful error messages
+
+4. **Utility functions** for:
+   - Coordinate conversion (dots to pixels/mm)
+   - Font mapping from ZPL codes to modern equivalents
+   - Barcode parameter interpretation
+
+Key requirements:
+- Use functional programming patterns
+- Immutable data structures
+- Comprehensive error handling
+- Type-safe throughout
+
+Please generate the complete parser implementation with examples and tests.

@@ -1,0 +1,53 @@
+zpl_parser:
+  name: "ZPL Resurrection Parser"
+  purpose: "Convert legacy ZPL commands into modern structured data"
+  approach: "Recursive descent parser with AST output"
+
+  input_handling:
+    encoding: "UTF-8"
+    line_endings: "CR/LF (ZPL standard)"
+    command_delimiter: "caret (^) prefix"
+
+  output_structure:
+    format: "Abstract Syntax Tree (AST)"
+    serialization: "JSON"
+    validation: "TypeScript interfaces"
+
+  supported_commands:
+    label_control:
+      - "XA: Start label"
+      - "XZ: End label" 
+      - "LLy: Label length"
+      - "LHx,y: Label home"
+
+    field_placement:
+      - "FOx,y: Field origin"
+      - "FRx,y: Field reverse"
+      - "GBw,h,t: Graphic box"
+
+    text_rendering:
+      - "FDa...a^FS: Field data with stop"
+      - "A@f,h,w: Font selection"
+      - "CFf,h,w: Change font"
+
+    barcodes:
+      - "BCo,h,f,g,e: Code 128"
+      - "B3o,h,f,g,e: Code 39"
+      - "BNo,h,f,g,e: Interleaved 2 of 5"
+
+    graphics:
+      - "GFe,f: Graphic field"
+      - "GSe,f: Graphic field stop"
+
+  error_handling:
+    invalid_commands: "Graceful degradation with warnings"
+    malformed_coordinates: "Default to (0,0) with error flag"
+    unknown_parameters: "Preserve as raw data"
+
+  ast_structure:
+    root: "ZplDocument"
+    children: "ZplCommand[]"
+    metadata:
+      - "source_zpl: Original ZPL string"
+      - "parse_errors: Validation issues"
+      - "warnings: Non-fatal issues"
